@@ -1,0 +1,16 @@
+{
+    "include": [
+        "./src/**/*.ts" //! This tells ts to look inside the src folder and all its subfolders for files with the .ts extension
+        //? Change this path based on where the ts files are located in the project
+    ],
+    "compileOnSave": true, //! This option allows you to compile the TypeScript files automatically whenever you save them in your code editor.
+    "compilerOptions": {
+        "rootDir": "./src", //?Tells TS where your source files start from
+        "outDir": "./build", //? Tells TS where to put the compiled JS Files
+        "target": "ES6" //! This option specifies the version of JavaScript that the TypeScript code will be compiled to. 
+        //? This is important because different versions of JavaScript have different features and syntax. 
+        //? We do this to target a specific version of JS so it soots our needs for a specific use case.
+        //? For example certain browser may only support certain versions of JS.
+
+    }
+}

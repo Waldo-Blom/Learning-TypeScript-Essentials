@@ -77,7 +77,7 @@ typescript-essentials-notes/
 
 | # | Lesson | Duration | Status |
 |---|--------|----------|--------|
-| 1 | [Understand TypeScript Basics](./lesson-01-typescript-basics/notes/01-typescript-basics.md) | 1h 5m | 🔄 In progress |
+| 1 | [Understand TypeScript Basics](./lesson-01-typescript-basics/notes/01-typescript-basics.md) | 1h 5m | ✅ Complete |
 | 2 | [Understand Types in TypeScript](./lesson-02-types-in-typescript/notes/02-types-in-typescript.md) | 27m | ⬜ Not started |
 | 3 | [Advanced Typing in TypeScript](./lesson-03-advanced-typing/notes/03-advanced-typing.md) | 1h 3m | ⬜ Not started |
 | 4 | [TypeScript Design Patterns](./lesson-04-design-patterns/notes/04-design-patterns.md) | 30m | ⬜ Not started |

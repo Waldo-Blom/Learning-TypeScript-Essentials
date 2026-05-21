@@ -1,0 +1,8 @@
+{
+    "extends": "tslint-config-airbnb",
+    "rules": {
+        "no-console": false, //! No console logs allowed
+        "indent": [true, "spaces", 4],
+        
+    }
+}
