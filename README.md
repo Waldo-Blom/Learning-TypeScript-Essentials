@@ -114,7 +114,3 @@ Each lesson's notes file follows a similar structure to this:
 - [Full-Stack Web Development with TypeScript 5](https://learning.oreilly.com/library/view/full-stack-web-development/9781835885581/)
 - [Official TypeScript Docs](https://www.typescriptlang.org/docs/)
 - [TypeScript Playground](https://www.typescriptlang.org/play)
--
----
-
-*Started: <!-- 18/05/2026 -->*
