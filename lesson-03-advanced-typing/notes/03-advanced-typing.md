@@ -316,44 +316,81 @@ if (isGameMove(newMove)) {
 4. Always guard function calls with runtime validation when dealing with external input (user data, API responses, etc.).
 ---
 
+
 ## 3.6 — `keyof` and `typeof` Operators
 
-  
+### `typeof` Operator in TypeScript
 
-<!-- Your notes here -->
+#### JavaScript Usage
 
+The `typeof` operator in JavaScript checks the type of a value at runtime.
+
+
+```typescript
+let x = "I am string";
+if(typeof x === "string") {
+    console.log("x is a string");
+}
+
+```
   
+#### TypeScript Extension
+
+TypeScript takes this further by using `typeof` to **create new types** based on existing variables or objects. This captures the exact type of a value and creates a reusable type definition from it.
 
 ```typescript
 
-  
+let person = {
+    name: "Waldo",
+    age: 22,
+    hairColor: "brown"
+}
+type PersonType = typeof person;
+// PersonType is now: { name: string; age: number; hairColor: string }
+
+let y = 5;
+type TypeOfY = typeof y;
+// TypeOfY is equivalent to: number
 
 ```
 
+**Key Point:** The `typeof` operator can be used both for runtime type checking (like in JavaScript) AND to create new types based on existing values.
 
----
+### `keyof` Operator in TypeScript
 
+#### What Does It Do?
+
+The `keyof` operator creates a **union type** representing all the possible keys (property names) of an object type.
+
+
+```typescript
+type PersonKey = keyof PersonType;
+// PersonKey is: "name" | "age" | "hairColor"
+```
+
+#### Practical Example: Type-Safe Property Access
+
+Without `keyof`, TypeScript cannot guarantee that the key you access exists on the object:
+
+With `keyof`, TypeScript ensures only valid keys are passed:
+
+
+```typescript
+function getPropertyFromPerson(person: PersonType, key: PersonKey) {
+    return person[key]; // Type-safe: key is guaranteed to be a valid property
+}
+```
 
 ## Key Takeaways
 
+1. **`typeof`** — Creates a type based on an existing variable's type; useful for capturing the shape of objects without manually writing out all properties.
   
-
-1.
-
-2.
-
-3.
-
-  
+2. **`keyof`** — Extracts all property names from a type as a union of string literals; ensures function parameters only accept valid property keys.
 
 ---
 
-  
 
 ## Questions / Things to Revisit
-
-  
-
 - Find out what other mapped types are commonly used - 3.2
 - Find another example where I can maybe implement a example myself so I can practice it and better understand it - 3.3
 - NBNB Find out what other types are also supported by literal types, is it only strings???? - see 3.5
