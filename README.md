@@ -79,8 +79,8 @@ typescript-essentials-notes/
 |---|--------|----------|--------|
 | 1 | [Understand TypeScript Basics](./lesson-01-typescript-basics/notes/01-typescript-basics.md) | 1h 5m | ✅ Complete |
 | 2 | [Understand Types in TypeScript](./lesson-02-types-in-typescript/notes/02-types-in-typescript.md) | 27m | ✅ Complete |
-| 3 | [Advanced Typing in TypeScript](./lesson-03-advanced-typing/notes/03-advanced-typing.md) | 1h 3m | ⬜ Not started |
-| 4 | [TypeScript Design Patterns](./lesson-04-design-patterns/notes/04-design-patterns.md) | 30m | ⬜ Not started |
+| 3 | [Advanced Typing in TypeScript](./lesson-03-advanced-typing/notes/03-advanced-typing.md) | 1h 3m | ✅ Complete |
+| 4 | [TypeScript Design Patterns](./lesson-04-design-patterns/notes/04-design-patterns.md) | 30m | 🔄 In progress |
 | 5 | [Node.js with TypeScript](./lesson-05-nodejs/notes/05-nodejs.md) | 24m | ⬜ Not started |
 | 6 | [React with TypeScript](./lesson-06-react/notes/06-react.md) | 21m | ⬜ Not started |
 | 7 | [Angular with TypeScript](./lesson-07-angular/notes/07-angular.md) | 18m | ⬜ Not started |
