@@ -1,8 +1,23 @@
-import { setDamage,setHealth,Damage,Health } from './types';
-
 //!A character can either take damage or they can heal
-type GameEvent =  { type: "TOOK DAMAGE"; damage: Damage; newHealth: Health } | { type: "HEALED"; healAmount: Health; newHealth: Health };
+type GameEvent =  { type: "TOOK DAMAGE"; damage: number; newHealth: number } | { type: "HEALED"; healAmount: number; newHealth:  number};
 
+//Health can be zero meaning a charater has died
+function isValidHealth(value:number):boolean{
+    if (value >= 0 && value <= 100  && Number.isInteger(value)){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+//Damage dealt is always more than one but no more than 100
+function isValidDamage(value:number):boolean{
+    if (value >= 1 && value <= 100  && Number.isInteger(value)){
+        return true;
+    }else{
+        return false;
+    }
+}
 
 interface Observer{
     update(event:GameEvent):void;
@@ -10,10 +25,10 @@ interface Observer{
 
 class FPS_Character{
     private name:string;
-    private health:Health;
+    private health:number;
     private observers: Observer[]=[];
 
-    constructor(name:string,intialHealth:Health){
+    constructor(name:string,intialHealth:number){
         this.name = name;
         this.health = intialHealth;
     }
@@ -31,37 +46,46 @@ class FPS_Character{
     }
 
     public takeDamage(damage:number):void{
-        let validDamage = setDamage(damage);
-        let newHealth = setHealth(Math.max(0,this.health - validDamage)); 
-        this.health = newHealth;
+        if (isValidDamage(damage)){
+            let newHealth = Math.max(0,this.health - damage); 
+            this.health = newHealth;
 
-        //We then notify the observers that the user took damage
-        this.notifyObervers({
-            type:"TOOK DAMAGE",
-            damage:validDamage,
-            newHealth:newHealth
-        });
-
-        if (this.health == 0){
-            console.log(`${this.name} died! What a bot, get good kid ;)`);
+            //We then notify the observers that the user took damage
+            this.notifyObervers({
+                type:"TOOK DAMAGE",
+                damage:damage,
+                newHealth:newHealth
+            });
+            if (this.health == 0){
+                console.log(`${this.name} died! What a bot, get good kid ;)`);
+            }
+        }else{
+            throw new Error("Invalid damage value, range must be between 1 -100.")
         }
+      
+        
 
     }
 
     public heal(healAmount:number):void{
-        let validHeal = setHealth(healAmount);
-        let newHealth = setHealth(Math.min(100,this.health + validHeal));
-        this.health = newHealth;
+        if (isValidHealth(healAmount)){
+            let newHealth = Math.min(100,this.health + healAmount);
+            this.health = newHealth;
 
-        this.notifyObervers({
-            type: "HEALED", 
-            healAmount: validHeal,
-            newHealth: newHealth
-        });
+            this.notifyObervers({
+                type: "HEALED", 
+                healAmount: healAmount,
+                newHealth: newHealth
+            });
+
+        }else{
+            throw new Error("Ivalid heath value,range must be between 0 - 100")
+        }
+
     }
 
 
-    public getHealth(): Health {
+    public getHealth(): number {
         return this.health;
     }
  
@@ -81,7 +105,7 @@ class UIHealthBar implements Observer {
         }
     }
  
-    private getBarVisual(health: Health): string {
+    private getBarVisual(health: number): string {
         const filledBlocks = Math.floor(health / 10);
         const emptyBlocks = 10 - filledBlocks;
         return `[${"█".repeat(filledBlocks)}${"░".repeat(emptyBlocks)}] ${health}/100`;
@@ -104,7 +128,7 @@ class SoundEffectSystem implements Observer {
 console.log("GAME EVENT SYSTEM - OBSERVER PATTERN DEMO");
 
 //? Create a game character
-const hero = new FPS_Character("Richthofen", setHealth(100));
+const hero = new FPS_Character("Richthofen", 100);
  
 //? Create the observers
 const healthBar = new UIHealthBar();
@@ -120,12 +144,15 @@ hero.addObserver(soundEffects);
 //? Trigger events
 console.log("\n--- Character Events ---");
  
-//? Event 1: Taking damage
-//hero.takeDamage(1000); -> //! This will fail at run time but not compile time, however this defeats the purpuse of TS???
+//! This will give a run time error, which is what we want, 
+//! it is not needed to over-engineer a solution to create a custom type to aviod a runtime issue at compile time 
+// ! (which is what I was tryign to do orginally)
+//hero.takeDamage(1000); 
  
 //? Event 2: Getting healed
-hero.heal(15);
- 
+hero.heal(15); // When hovering over it gives us that the expected value is of type number which is good enough, we check valid range at run time not compile time
+//hero.heal("Heal 15hp")//This will not work as it needs to be number
+
 //? Event 3: Taking more damage
 hero.takeDamage(60);
  
